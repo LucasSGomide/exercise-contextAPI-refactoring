@@ -1,4 +1,4 @@
-import React, { children } from 'react';
+import React from 'react';
 import MyContext from './MyContext';
 
 class Provider extends React.Component {
@@ -11,37 +11,47 @@ class Provider extends React.Component {
         yellowCar: false,
       },
       signal: {
-        red: true,
-        blue: false,
-        yellow: false,
+        color: 'red'
       },
     }
 
     this.moveCars = this.moveCars.bind(this);
+    this.handleSignal = this.handleSignal.bind(this);
   }
 
-  handleSignal() {
-
+  handleSignal(color) {
+    this.setState({
+      signal: {
+        color: color,
+      }
+    });
   }
 
   moveCars(car, bool) {
     this.setState({
-      [car]: bool
-    })
+      cars: {
+        [car]: bool
+      }
+    });
   }
 
   render() {
     const { redCar, blueCar, yellowCar } = this.state.cars;
+    const { color } = this.state.signal;
 
-    const provideCars = {
+    const myProvider = {
       redCar,
       blueCar,
       yellowCar,
-      moveCars: this.moveCars,
+      moveCar: this.moveCars,
+      color,
+      changeSignal: this.handleSignal,
     }
 
+    const { children } = this.props
+
     return (
-      <MyContext.Provider value={provideCars}>
+      <MyContext.Provider value={myProvider}>
         { children }
       </MyContext.Provider>
     );

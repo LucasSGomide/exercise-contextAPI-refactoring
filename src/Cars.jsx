@@ -9,11 +9,11 @@ import MyContext from './context/MyContext';
 function Cars() {
   return (
     <MyContext.Consumer>
-      { (value) => (
+      { ({ redCar , blueCar, yellowCar, moveCar }) => (
           <div>
             <div>
               <img
-                className={value.redCar ? 'car-right' : 'car-left'}
+                className={redCar ? 'car-right' : 'car-left'}
                 src={carRed}
                 alt="red car"
               />
@@ -26,12 +26,12 @@ function Cars() {
             </div>
             <div>
               <img
-                //className={value.blueCar ? 'car-right' : 'car-left'}
+                className={blueCar ? 'car-right' : 'car-left'}
                 src={carBlue}
                 alt="blue car"
               />
               <button
-                //onClick={() => moveCar('blue', !blueCar)}
+                onClick={() => moveCar('blueCar', !blueCar)}
                 type="button"
               >
                 Move
@@ -44,7 +44,7 @@ function Cars() {
                 alt="yellow car"
               />
               <button
-                //onClick={() => moveCar('yellow', !yellowCar)}
+                onClick={() => moveCar('yellowCar', !yellowCar)}
                 type="button"
               >
                 Move
