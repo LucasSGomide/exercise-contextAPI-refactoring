@@ -11,9 +11,9 @@ class Provider extends React.Component {
         yellowCar: false,
       },
       signal: {
-        red,
-        blue,
-        yellow,
+        red: true,
+        blue: false,
+        yellow: false,
       },
     }
 
@@ -31,9 +31,17 @@ class Provider extends React.Component {
   }
 
   render() {
-    const { cars } = this.state;
+    const { redCar, blueCar, yellowCar } = this.state.cars;
+
+    const provideCars = {
+      redCar,
+      blueCar,
+      yellowCar,
+      moveCars: this.moveCars,
+    }
+
     return (
-      <MyContext.Provider value={...cars, this.moveCars}>
+      <MyContext.Provider value={provideCars}>
         { children }
       </MyContext.Provider>
     );
